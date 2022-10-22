@@ -1,0 +1,11 @@
+<mat-card
+    class="item" 
+    *ngIf="bonsai"
+    (dblclick)="edit.emit(bonsai)"  
+>
+<img mat-card-image src="{{bonsai.pictureLink}}" alt="picture of bonsai">
+<h3>{{ bonsai.title }}</h3>
+<p>
+    {{ bonsai.description }}
+</p>
+</mat-card>

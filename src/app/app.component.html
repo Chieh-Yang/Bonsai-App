@@ -1,0 +1,63 @@
+<mat-toolbar color="primary">
+  <mat-icon>nature</mat-icon>
+  <span>Selling and talking care of Bonsais</span>
+</mat-toolbar>
+
+<div class="content-wrapper">
+
+  <button (click)="addBonsai()" mat-button>
+    <mat-icon>add</mat-icon>Add Bonsai
+  </button>
+
+  <div class="container-wrapper">
+    <div class="container">
+      <h2>Bonsais available</h2>
+      <mat-card 
+        cdkDropList
+        id="bonsaisAvailable"
+        #bonsaisAvailableList="cdkDropList"
+        [cdkDropListData]="bonsaiCollection"
+        [cdkDropListConnectedTo]="[shoppingCartList]"
+        (cdkDropListDropped)="drop($event)"
+        class="list"
+        >
+        <p
+          class="empty-label"
+          *ngIf="bonsaiCollection.length === 0" >
+          Empty list
+        </p>
+        <app-bonsai
+          (edit)="editBonsai('bonsaiCollection', $event)"
+          *ngFor="let bonsai of bonsaiCollection"
+          cdkDrag
+          [bonsai]="bonsai">
+        </app-bonsai>
+
+      </mat-card>
+    </div>
+    <div class="container">
+      <h2>Shopping Cart</h2>
+      <mat-card 
+        cdkDropList
+        id="shoppingCart"
+        #shoppingCartList="cdkDropList"
+        [cdkDropListData]="shoppingCart"
+        [cdkDropListConnectedTo]="[bonsaisAvailableList]"
+        (cdkDropListDropped)="drop($event)"
+        class="list"
+        >
+        <p
+          class="empty-label"
+          *ngIf="shoppingCart.length === 0" >
+          Empty list
+        </p>
+        <app-bonsai
+          (edit)="editBonsai('shoppingCart', $event)"
+          *ngFor="let bonsai of shoppingCart"
+          cdkDrag
+          [bonsai]="bonsai">
+        </app-bonsai>
+      </mat-card>
+    </div>
+  </div>
+</div>
